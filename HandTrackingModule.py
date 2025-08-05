@@ -3,7 +3,6 @@ import mediapipe as mp
 import time
 import math
 
-
 class handDetector():
 	def __init__(self, mode=False, maxHands=2, modelComplexity=1, detectionCon=0.5, trackCon=0.5):
 		self.mode = mode
@@ -66,23 +65,6 @@ class handDetector():
 
 		length = math.hypot(x2-x1, y2-y1)
 		return length, img, [x1, y1, x2, y2, cx, cy]
-
-	def fingersUp(self):
-		fingers = []
-
-		# Thumb
-		if self.lmList[self.tipIds[0]][1] < self.lmList[self.tipIds[0]-1][1]:
-			fingers.append(1)
-		else:
-			fingers.append(0)
-
-		# 4 Fingers
-		for id in range(1,5):
-			if self.lmList[self.tipIds[id]][2] < self.lmList[self.tipIds[id]-2][2]:
-				fingers.append(1)
-			else:
-				fingers.append(0)
-		return fingers
 
 def main():
 	pTime = 0
